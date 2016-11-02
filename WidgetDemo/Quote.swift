@@ -8,13 +8,13 @@
 
 import Foundation
 
-public class Quote: NSObject {
-    public let text: String
-    public let author: String
+open class Quote: NSObject {
+    open let text: String
+    open let author: String
     
-    public init(quoteDictionary: NSDictionary) {
-        text = quoteDictionary["quote"] as! String
-        author = quoteDictionary["author"] as! String
+    public init(quoteDictionary: [String:String]) {
+        text = quoteDictionary["quote"]!
+        author = quoteDictionary["author"]!
     }
     
 }
