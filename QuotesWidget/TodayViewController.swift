@@ -87,7 +87,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         case QuoteCategory.movies:
             networking.randomMoviesQuote(completion)
         case QuoteCategory.famous:
-            networking.randomMoviesQuote(completion)
+            networking.randomFamousPeopleQuote(completion)
         }
     }
     
