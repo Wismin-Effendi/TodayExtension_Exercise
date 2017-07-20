@@ -11,9 +11,18 @@ import Foundation
 open class Networking: NSObject {
     
     public typealias CompletionHandler = (_ quote: Quote?, _ error: NSError?) -> ()
+ 
     
+    open func randomFamousPeopleQuote(_ completion: @escaping CompletionHandler) {
+        randomQuote(completion, category: "famous")
+    }
+   
     open func randomMoviesQuote(_ completion: @escaping CompletionHandler) {
-        let apiURL = URL(string: "https://andruxnet-random-famous-quotes.p.mashape.com/?cat=movies")
+        randomQuote(completion, category: "movies")
+    }
+    
+    private func randomQuote(_ completion: @escaping CompletionHandler, category: String) {
+        let apiURL = URL(string: "https://andruxnet-random-famous-quotes.p.mashape.com/?cat=\(category)")
         var request = URLRequest(url: apiURL!)
         request.httpMethod = "POST"
         request.addValue("70kHu82V9Jmshv3cD2gNkUF915jsp1K0HlYjsnVcns7jvOI4O1", forHTTPHeaderField: "X-Mashape-Key")
