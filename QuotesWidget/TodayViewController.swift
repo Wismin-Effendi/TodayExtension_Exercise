@@ -21,7 +21,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
     
-    let quoteCategory = [Key.Category.movies, Key.Category.famous]
+    enum QuoteCategory: String {
+        case movies = "movies"
+        case famous = "famous"
+    }
+    
+    let allQuoteCategories = [Key.Category.movies, Key.Category.famous]
     
     let defaults = UserDefaults.standard
     var lastSelectedCategory: String!
@@ -33,44 +38,65 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     let networking = Networking()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        lastSelectedCategory = defaults.object(forKey: Key.category) as? String ?? QuoteCategory.movies.rawValue
+        segmentControl.selectedSegmentIndex = allQuoteCategories.index(of: lastSelectedCategory)!
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.quoteLabel.text = nil
         self.authorLabel.text = nil
-        
-        lastSelectedCategory = defaults.object(forKey: Key.category) as? String ?? Key.Category.movies
-        segmentControl.selectedSegmentIndex = quoteCategory.index(of: lastSelectedCategory)!
+    
             
-        networking.randomMoviesQuote { (quote, error) in
+        let completionClosure = {[weak self] (quote: Quote?, error: NSError?) in
             if let quote = quote {
                 DispatchQueue.main.async {
-                    self.quoteLabel.text = quote.text
-                    self.authorLabel.text = quote.author
+                    self?.quoteLabel.text = quote.text
+                    self?.authorLabel.text = quote.author
                 }
             }
         }
+        
+        getRandomQuoteByCategorySelection(completion: completionClosure)
     }
     
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-        networking.randomMoviesQuote { (quote, error) in
+        let networkingCompletionClosure = {[weak self] (quote: Quote?, error: NSError?) in
             guard let quote = quote, error == nil else {
                 completionHandler(.failed)
                 return
             }
             
             DispatchQueue.main.async {
-                self.quoteLabel.text = quote.text
-                self.authorLabel.text = quote.author
+                self?.quoteLabel.text = quote.text
+                self?.authorLabel.text = quote.author
             }
             completionHandler(NCUpdateResult.newData)
+        }
+        
+        getRandomQuoteByCategorySelection(completion: networkingCompletionClosure)
+    }
+    
+    private func getRandomQuoteByCategorySelection(completion: @escaping Networking.CompletionHandler ) {
+        let category = QuoteCategory(rawValue: lastSelectedCategory)!
+        switch category {
+        case QuoteCategory.movies:
+            networking.randomMoviesQuote(completion)
+        case QuoteCategory.famous:
+            networking.randomMoviesQuote(completion)
         }
     }
     
     @IBAction func categorySelected(_ sender: UISegmentedControl) {
-        defaults.set(quoteCategory[sender.selectedSegmentIndex], forKey: Key.category)
+        lastSelectedCategory = allQuoteCategories[sender.selectedSegmentIndex]
+        defaults.set(lastSelectedCategory, forKey: Key.category)
         
-        
+        widgetPerformUpdate { (result) in
+            
+        }
     }
 }

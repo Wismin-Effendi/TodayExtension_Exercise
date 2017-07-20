@@ -19,28 +19,28 @@
                         <viewControllerLayoutGuide type="bottom" id="FKl-LY-JtV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="110"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Rj-TT-clv">
-                                <rect key="frame" x="24" y="56.5" width="272" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="7Rj-TT-clv">
+                                <rect key="frame" x="8" y="32" width="304" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZL-EW-NCV">
-                                <rect key="frame" x="270" y="81" width="42" height="21"/>
+                                <rect key="frame" x="270" y="121" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="UeK-AM-AvM">
-                                <rect key="frame" x="98" y="8" width="125" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="UeK-AM-AvM">
+                                <rect key="frame" x="98" y="0.0" width="125" height="29"/>
                                 <segments>
                                     <segment title="Movies"/>
                                     <segment title="Famous"/>
                                 </segments>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <action selector="categorySelected:" destination="M4Y-Lb-cyx" eventType="valueChanged" id="BKG-QF-wXd"/>
                                 </connections>
@@ -48,11 +48,14 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="7Rj-TT-clv" secondAttribute="trailing" constant="8" id="R9G-9o-On3"/>
+                            <constraint firstItem="UeK-AM-AvM" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" id="5Fr-xk-z4x"/>
+                            <constraint firstItem="7Rj-TT-clv" firstAttribute="top" secondItem="UeK-AM-AvM" secondAttribute="bottom" constant="4" id="F96-9G-Xya"/>
+                            <constraint firstItem="KZL-EW-NCV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="7Rj-TT-clv" secondAttribute="bottom" constant="4" id="KVk-Dt-hae"/>
+                            <constraint firstItem="UeK-AM-AvM" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="NdH-zs-De0"/>
                             <constraint firstItem="KZL-EW-NCV" firstAttribute="trailing" secondItem="S3S-Oj-5AN" secondAttribute="trailingMargin" constant="8" id="Swl-c8-gwi"/>
-                            <constraint firstItem="KZL-EW-NCV" firstAttribute="top" secondItem="7Rj-TT-clv" secondAttribute="bottom" constant="4" id="abo-2a-kzJ"/>
+                            <constraint firstItem="7Rj-TT-clv" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" constant="8" id="dPN-HU-rCT"/>
                             <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="KZL-EW-NCV" secondAttribute="bottom" constant="8" id="g59-U6-Ghp"/>
-                            <constraint firstItem="7Rj-TT-clv" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" constant="8" id="hpM-9Z-I1s"/>
+                            <constraint firstAttribute="trailing" secondItem="7Rj-TT-clv" secondAttribute="trailing" constant="8" id="pZ0-Ry-0mj"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -60,7 +63,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="110"/>
+                    <size key="freeformSize" width="320" height="150"/>
                     <connections>
                         <outlet property="authorLabel" destination="KZL-EW-NCV" id="02X-Xn-dVg"/>
                         <outlet property="quoteLabel" destination="7Rj-TT-clv" id="TIo-Ic-oip"/>
